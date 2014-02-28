@@ -4,7 +4,7 @@ module Comma
 
   class Extractor
 
-    def initialize(instance, style, formats)
+    def initialize(instance, style, options, formats)
       @instance = instance
       @style = style
       @formats = formats

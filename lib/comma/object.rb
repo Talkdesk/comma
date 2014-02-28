@@ -9,19 +9,19 @@ class Object
     (self.comma_formats ||= {})[style] = block
   end
 
-  def to_comma(style = :default)
-    extract_with(Comma::DataExtractor, style)
+  def to_comma(style = :default, options = {})
+    extract_with(Comma::DataExtractor, style, options)
   end
 
-  def to_comma_headers(style = :default)
-    extract_with(Comma::HeaderExtractor, style)
+  def to_comma_headers(style = :default, options = {})
+    extract_with(Comma::HeaderExtractor, style, options)
   end
 
   private
 
-  def extract_with(extractor_class, style = :default)
+  def extract_with(extractor_class, style = :default, options = {})
     raise_unless_style_exists(style)
-    extractor_class.new(self, style, self.class.comma_formats).results
+    extractor_class.new(self, style, options, self.class.comma_formats).results
   end
 
   def raise_unless_style_exists(style)
