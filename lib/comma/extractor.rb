@@ -7,6 +7,7 @@ module Comma
     def initialize(instance, style, context, formats)
       @instance = instance
       @style = style
+      @context = context
       @formats = formats
       @results = []
     end
@@ -14,6 +15,10 @@ module Comma
     def results
       instance_eval &@formats[@style]
       @results.map { |r| convert_to_data_value(r) }
+    end
+
+    def context
+      @context
     end
 
     def id(*args, &block)
